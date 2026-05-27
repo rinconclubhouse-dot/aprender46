@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recurso 46 — Proyecto Creación de Guías + Mapas</title>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=IBM+Plex+Sans+Condensed:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--cel:#44BCF9;
+--fuc:#E63289;
+--mar:#060036;
+--amb:#FFDC00;
+--pur:#7B4FA0;
+--vrd:#059669;
+--bg:#EDEDED;
+--wh:#FFFFFF;
+--gris:#9CA3AF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:'Poppins',sans-serif;
+background:#f4f7fb;
+color:var(--mar);
+}
+.site-header{
+background:linear-gradient(90deg,var(--cel),var(--fuc));
+padding:24px;
+color:white;
+display:flex;
+align-items:center;
+gap:18px;
+flex-wrap:wrap;
+}
+.logo{
+font-size:60px;
+}
+.site-header h1{
+font-family:'Russo One',sans-serif;
+font-size:2rem;
+line-height:1.2;
+}
+.badge{
+background:white;
+color:var(--fuc);
+padding:8px 16px;
+border-radius:999px;
+font-weight:700;
+}
+.tabs{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+padding:18px;
+background:white;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+.tab{
+padding:12px 18px;
+border-radius:14px;
+background:#eef2ff;
+font-weight:700;
+cursor:pointer;
+transition:.25s;
+}
+.tab.active{
+background:var(--cel);
+color:white;
+}
+.section{
+display:none;
+padding:30px;
+max-width:1200px;
+margin:auto;
+}
+.section.show{
+display:block;
+animation:fade .3s ease;
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
+}
+.hero{
+background:white;
+padding:30px;
+border-radius:28px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+margin-bottom:25px;
+}
+.hero h2{
+font-family:'Russo One';
+font-size:2rem;
+margin-bottom:15px;
+color:var(--mar);
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:24px;
+}
+.card{
+background:white;
+border-radius:22px;
+padding:20px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+border-top:8px solid var(--cel);
+}
+.card h3{
+font-size:1.1rem;
+margin-bottom:10px;
+}
+.card p{
+line-height:1.6;
+font-size:.95rem;
+}
+.tip{
+margin-top:20px;
+display:flex;
+gap:14px;
+align-items:flex-start;
+background:#FFFBEA;
+border-left:8px solid var(--amb);
+padding:18px;
+border-radius:18px;
+}
+.tip .emoji{
+font-size:2rem;
+}
+.step{
+background:white;
+padding:25px;
+border-radius:24px;
+margin-bottom:24px;
+box-shadow:0 5px 16px rgba(0,0,0,.08);
+}
+.step-header{
+display:flex;
+gap:20px;
+align-items:center;
+margin-bottom:20px;
+}
+.step-num{
+width:80px;
+height:80px;
+border-radius:20px;
+background:var(--cel);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:2rem;
+font-weight:800;
+}
+.step h3{
+font-size:1.7rem;
+}
+.action{
+display:flex;
+gap:16px;
+align-items:flex-start;
+background:#f7f8fc;
+padding:18px;
+border-radius:18px;
+margin-top:15px;
+border-left:6px solid var(--fuc);
+}
+.action .icon{
+font-size:2rem;
+}
+.fake-word{
+margin-top:22px;
+background:white;
+border:2px solid #d1d5db;
+border-radius:18px;
+overflow:hidden;
+}
+.word-toolbar{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+padding:12px;
+background:#eff6ff;
+border-bottom:2px solid #dbeafe;
+}
+.tool-btn{
+padding:10px 14px;
+border-radius:12px;
+background:white;
+font-size:.9rem;
+font-weight:700;
+border:1px solid #dbeafe;
+}
+.word-page{
+padding:30px;
+min-height:350px;
+background:white;
+}
+.big-title{
+font-size:2rem;
+font-weight:800;
+color:var(--fuc);
+margin-bottom:12px;
+}
+.placeholder{
+margin-top:20px;
+border:3px dashed var(--gris);
+padding:35px;
+text-align:center;
+border-radius:20px;
+background:#fafafa;
+color:#6b7280;
+}
+.columns-demo{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-top:20px;
+}
+.col-box{
+background:#f8fafc;
+padding:16px;
+border-radius:16px;
+line-height:1.7;
+}
+.map-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+margin-top:24px;
+}
+.map-card{
+background:white;
+padding:22px;
+border-radius:22px;
+box-shadow:0 5px 14px rgba(0,0,0,.08);
+}
+.map-preview{
+margin-top:18px;
+height:180px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#f8fafc;
+}
+.checklist{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 5px 16px rgba(0,0,0,.08);
+}
+.checklist li{
+list-style:none;
+padding:14px;
+margin-bottom:10px;
+background:#f0fdf4;
+border-radius:14px;
+font-weight:600;
+}
+.nav-buttons{
+display:flex;
+justify-content:space-between;
+margin-top:30px;
+gap:12px;
+}
+.nav-buttons button{
+background:var(--mar);
+color:white;
+border:none;
+padding:14px 20px;
+border-radius:16px;
+font-weight:700;
+cursor:pointer;
+}
+.final-box{
+margin-top:24px;
+background:var(--mar);
+color:white;
+padding:28px;
+border-radius:24px;
+text-align:center;
+}
+@media(max-width:768px){
+.section{padding:18px}
+.site-header h1{font-size:1.4rem}
+.step-header{flex-direction:column;align-items:flex-start}
+.columns-demo{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+<div class="logo">🤖</div>
+<div>
+<h1>Recurso 46 — Proyecto Creación de Guías + Mapas</h1>
+<p>Aprende paso a paso cómo crear una guía completa en Word</p>
+</div>
+<div class="badge">TALLER INTERACTIVO</div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="goTo('intro',this)">1. Intro</div>
+<div class="tab" onclick="goTo('portada',this)">2. Portada</div>
+<div class="tab" onclick="goTo('indice',this)">3. Índice</div>
+<div class="tab" onclick="goTo('contenido',this)">4. Contenido</div>
+<div class="tab" onclick="goTo('formato',this)">5. Formato</div>
+<div class="tab" onclick="goTo('mapas',this)">6. Mapas</div>
+<div class="tab" onclick="goTo('final',this)">7. Final</div>
+</div>
+
+<section class="section show" id="sec-intro">
+<div class="hero">
+<h2>🚀 Bienvenido al Proyecto</h2>
+<p>En este proyecto vas a crear una guía digital completa usando Word. También crearás un mapa conceptual creativo.</p>
+
+<div class="grid">
+<div class="card">
+<h3>📘 Portada</h3>
+<p>Diseña una portada llamativa con título, imagen y colores.</p>
+</div>
+<div class="card">
+<h3>📑 Índice</h3>
+<p>Organiza las partes de tu guía paso a paso.</p>
+</div>
+<div class="card">
+<h3>🖼️ Imágenes</h3>
+<p>Aprende a insertar imágenes y dar formato.</p>
+</div>
+<div class="card">
+<h3>📊 Tablas</h3>
+<p>Usa tablas para organizar información.</p>
+</div>
+<div class="card">
+<h3>📰 Columnas</h3>
+<p>Divide el texto en columnas como una revista.</p>
+</div>
+<div class="card">
+<h3>🧠 Mapas</h3>
+<p>Elige un tipo de mapa conceptual y créalo.</p>
+</div>
+</div>
+
+<div class="tip">
+<div class="emoji">💡</div>
+<div>
+<strong>TIP DE WROBIT</strong>
+<p>Haz títulos grandes y usa colores para que tu guía se vea más divertida.</p>
+</div>
+</div>
+
+<div class="nav-buttons">
+<div></div>
+<button onclick="nextTab(1)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-portada">
+<div class="step">
+<div class="step-header">
+<div class="step-num">1</div>
+<div>
+<h3>Crea la Portada</h3>
+<p>La portada es lo primero que verá el lector.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">✍️</div>
+<div>
+<strong>Escribe un título grande</strong>
+<p>Usa WordArt o texto grande y colorido.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">🖼️</div>
+<div>
+<strong>Inserta una imagen</strong>
+<p>Haz clic en Insertar → Imágenes.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">🎨</div>
+<div>
+<strong>Agrega colores</strong>
+<p>Usa colores llamativos para el fondo y los títulos.</p>
+</div>
+</div>
+
+<div class="fake-word">
+<div class="word-toolbar">
+<div class="tool-btn">Inicio</div>
+<div class="tool-btn">Insertar</div>
+<div class="tool-btn">Diseño</div>
+<div class="tool-btn">WordArt</div>
+<div class="tool-btn">Imágenes</div>
+</div>
+<div class="word-page">
+<div class="big-title">Mi Guía Digital</div>
+<p><strong>Nombre:</strong> ____________________</p>
+<div class="placeholder">📷 AQUÍ VA LA IMAGEN DE PORTADA</div>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(0)">← Anterior</button>
+<button onclick="nextTab(2)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-indice">
+<div class="step">
+<div class="step-header">
+<div class="step-num">2</div>
+<div>
+<h3>Haz el Índice y la Introducción</h3>
+<p>Organiza las partes de tu proyecto.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">📑</div>
+<div>
+<strong>Crea un índice</strong>
+<p>Escribe cada parte de la guía en orden.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">📝</div>
+<div>
+<strong>Escribe una introducción</strong>
+<p>Explica de qué trata tu guía.</p>
+</div>
+</div>
+
+<div class="fake-word">
+<div class="word-toolbar">
+<div class="tool-btn">Negrita</div>
+<div class="tool-btn">Centrar</div>
+<div class="tool-btn">Viñetas</div>
+</div>
+<div class="word-page">
+<h2>Índice</h2>
+<ul>
+<li>Portada</li>
+<li>Introducción</li>
+<li>Contenido</li>
+<li>Conclusión</li>
+</ul>
+
+<h2 style="margin-top:20px">Introducción</h2>
+<p>En esta guía aprenderás cómo crear documentos digitales con Word.</p>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(1)">← Anterior</button>
+<button onclick="nextTab(3)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-contenido">
+<div class="step">
+<div class="step-header">
+<div class="step-num">3</div>
+<div>
+<h3>Agrega el Contenido</h3>
+<p>Ahora llena tu guía con información e imágenes.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">📌</div>
+<div>
+<strong>Usa viñetas</strong>
+<p>Las viñetas ayudan a organizar ideas.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">📊</div>
+<div>
+<strong>Inserta tablas</strong>
+<p>Haz clic en Insertar → Tabla.</p>
+</div>
+</div>
+
+<div class="fake-word">
+<div class="word-toolbar">
+<div class="tool-btn">Tabla</div>
+<div class="tool-btn">Viñetas</div>
+<div class="tool-btn">Color</div>
+</div>
+<div class="word-page">
+<h2>Animales Vertebrados</h2>
+<ul>
+<li>Mamíferos</li>
+<li>Aves</li>
+<li>Peces</li>
+</ul>
+
+<table style="width:100%;margin-top:20px;border-collapse:collapse">
+<tr>
+<td style="border:2px solid #ccc;padding:10px"><strong>Animal</strong></td>
+<td style="border:2px solid #ccc;padding:10px"><strong>Tipo</strong></td>
+</tr>
+<tr>
+<td style="border:2px solid #ccc;padding:10px">Perro</td>
+<td style="border:2px solid #ccc;padding:10px">Mamífero</td>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(2)">← Anterior</button>
+<button onclick="nextTab(4)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-formato">
+<div class="step">
+<div class="step-header">
+<div class="step-num">4</div>
+<div>
+<h3>Formato, Columnas y Bordes</h3>
+<p>Haz que tu guía se vea profesional.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">📰</div>
+<div>
+<strong>Usa columnas</strong>
+<p>Ve a Diseño → Columnas.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">🟦</div>
+<div>
+<strong>Agrega bordes</strong>
+<p>Usa bordes decorativos para mejorar el diseño.</p>
+</div>
+</div>
+
+<div class="action">
+<div class="icon">🎨</div>
+<div>
+<strong>Cambia el color de página</strong>
+<p>Haz clic en Diseño → Color de página.</p>
+</div>
+</div>
+
+<div class="columns-demo">
+<div class="col-box">
+<h4>Columna 1</h4>
+<p>Las columnas ayudan a dividir la información.</p>
+</div>
+<div class="col-box">
+<h4>Columna 2</h4>
+<p>Se usan en revistas, periódicos y folletos.</p>
+</div>
+</div>
+
+<div class="placeholder">🖼️ AQUÍ LOS ESTUDIANTES PUEDEN TOMAR CAPTURA DE SU DOCUMENTO</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(3)">← Anterior</button>
+<button onclick="nextTab(5)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-mapas">
+<div class="step">
+<div class="step-header">
+<div class="step-num">5</div>
+<div>
+<h3>Crea un Mapa Conceptual</h3>
+<p>Elige el tipo de mapa que más te guste.</p>
+</div>
+</div>
+
+<div class="map-grid">
+<div class="map-card">
+<h3>📐 Jerárquico</h3>
+<p>Para clasificar información.</p>
+<div class="map-preview">
+<svg width="180" height="150">
+<rect x="55" y="10" width="70" height="30" rx="10" fill="#44BCF9"/>
+<line x1="90" y1="40" x2="50" y2="70" stroke="#060036" stroke-width="3"/>
+<line x1="90" y1="40" x2="130" y2="70" stroke="#060036" stroke-width="3"/>
+<rect x="20" y="70" width="60" height="28" rx="8" fill="#E63289"/>
+<rect x="100" y="70" width="60" height="28" rx="8" fill="#E63289"/>
+</svg>
+</div>
+</div>
+
+<div class="map-card">
+<h3>🕷️ Araña</h3>
+<p>Para lluvia de ideas.</p>
+<div class="map-preview">
+<svg width="180" height="150">
+<circle cx="90" cy="75" r="30" fill="#E63289"/>
+<line x1="90" y1="75" x2="40" y2="30" stroke="#060036" stroke-width="3"/>
+<line x1="90" y1="75" x2="140" y2="30" stroke="#060036" stroke-width="3"/>
+<line x1="90" y1="75" x2="40" y2="120" stroke="#060036" stroke-width="3"/>
+<line x1="90" y1="75" x2="140" y2="120" stroke="#060036" stroke-width="3"/>
+</svg>
+</div>
+</div>
+
+<div class="map-card">
+<h3>⚙️ Flujo</h3>
+<p>Para procesos en orden.</p>
+<div class="map-preview">
+<svg width="180" height="150">
+<rect x="10" y="55" width="40" height="30" rx="8" fill="#059669"/>
+<line x1="50" y1="70" x2="70" y2="70" stroke="#060036" stroke-width="3"/>
+<rect x="70" y="55" width="40" height="30" rx="8" fill="#059669"/>
+<line x1="110" y1="70" x2="130" y2="70" stroke="#060036" stroke-width="3"/>
+<rect x="130" y="55" width="40" height="30" rx="8" fill="#059669"/>
+</svg>
+</div>
+</div>
+
+<div class="map-card">
+<h3>🧠 Mental</h3>
+<p>Para creatividad y memorización.</p>
+<div class="map-preview">
+<svg width="180" height="150">
+<circle cx="90" cy="75" r="25" fill="#7B4FA0"/>
+<path d="M90 50 C40 20,20 40,30 80" stroke="#7B4FA0" fill="none" stroke-width="4"/>
+<path d="M90 50 C140 20,160 40,150 80" stroke="#7B4FA0" fill="none" stroke-width="4"/>
+<path d="M90 100 C50 120,40 130,35 140" stroke="#7B4FA0" fill="none" stroke-width="4"/>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="tip">
+<div class="emoji">💡</div>
+<div>
+<strong>TIP DE WROBIT</strong>
+<p>Usa pocas palabras y muchos colores en tu mapa conceptual.</p>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(4)">← Anterior</button>
+<button onclick="nextTab(6)">Siguiente →</button>
+</div>
+</div>
+</section>
+
+<section class="section" id="sec-final">
+<div class="checklist">
+<h2 style="margin-bottom:20px">✅ Revisa Antes de Entregar</h2>
+<ul>
+<li>☐ Mi guía tiene portada</li>
+<li>☐ Agregué un índice</li>
+<li>☐ Escribí una introducción</li>
+<li>☐ Inserté imágenes</li>
+<li>☐ Usé viñetas</li>
+<li>☐ Creé tablas</li>
+<li>☐ Usé columnas</li>
+<li>☐ Agregué bordes</li>
+<li>☐ Cambié el color de página</li>
+<li>☐ Hice un mapa conceptual</li>
+<li>☐ Revisé la ortografía</li>
+</ul>
+
+<div class="final-box">
+<h2>🏆 ¡Excelente trabajo!</h2>
+<p>Ya sabes crear guías digitales completas usando Word.</p>
+</div>
+
+<div class="nav-buttons">
+<button onclick="nextTab(5)">← Anterior</button>
+<div></div>
+</div>
+</div>
+</section>
+
+<script>
+const tabs=["intro","portada","indice","contenido","formato","mapas","final"];
+
+function goTo(id,btn){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById('sec-'+id).classList.add('show');
+if(btn){btn.classList.add('active');}
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextTab(index){
+const id=tabs[index];
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById('sec-'+id).classList.add('show');
+document.querySelectorAll('.tab')[index].classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
